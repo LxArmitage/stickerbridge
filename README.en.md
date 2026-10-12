@@ -7,7 +7,6 @@
 Paste the link of a Telegram sticker pack and the app turns it into packs that
 WhatsApp accepts: static, animated and video stickers.
 
-[![Tests](https://github.com/LxArmitage/stickerbridge/actions/workflows/pruebas.yml/badge.svg)](https://github.com/LxArmitage/stickerbridge/actions/workflows/pruebas.yml)
 ![Expo](https://img.shields.io/badge/Expo-57-000020?logo=expo)
 ![React Native](https://img.shields.io/badge/React_Native-0.86-61DAFB?logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)
