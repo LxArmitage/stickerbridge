@@ -1,0 +1,38 @@
+# Pruebas del servidor (en su imagen de Docker, con ffmpeg y rlottie) y de la
+# app (tipos y lógica) en cada push y pull request.
+
+name: Pruebas
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  servidor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Imagen del servidor
+        run: docker build --build-arg DEV=1 -t stickerbridge-api api
+
+      - name: Pruebas (conversión real de stickers sintéticos)
+        run: docker run --rm -v "$PWD/api/tests:/app/tests" stickerbridge-api python -m pytest -q
+
+  app:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: movil
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: movil/package-lock.json
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test

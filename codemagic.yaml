@@ -1,0 +1,23 @@
+# Compila la app de iPhone (movil/) sin firmar en una Mac de Codemagic
+# (500 minutos gratis al mes en cuentas personales). El .ipa se instala con
+# Sideloadly; ver "Instalar la app en el iPhone" en el README.
+workflows:
+  iphone:
+    name: App de iPhone
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    environment:
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: app-iphone
+          include: true
+          source: true
+    scripts:
+      - name: Compilar el .ipa sin firmar
+        script: bash movil/scripts/compilar-ipa.sh
+    artifacts:
+      - movil/StickerBridge.ipa

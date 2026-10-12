@@ -1,0 +1,40 @@
+# Lo mismo que codemagic.yaml, en una Mac de GitHub: compila la app de iPhone
+# sin firmar (movil/scripts/compilar-ipa.sh) para instalarla con Sideloadly.
+#
+# Sólo se lanza a mano (Actions → App de iPhone → Run workflow): la compilación
+# normal corre en Codemagic, y aquí las Mac gastan minutos más rápido.
+
+name: App de iPhone
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ipa:
+    runs-on: macos-latest
+    timeout-minutes: 75
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: movil/package-lock.json
+
+      - name: Elegir Xcode
+        run: |
+          # El Xcode estable más nuevo de la Mac; React Native pide 16.1 o más.
+          xcode="$(ls -d /Applications/Xcode_*.app | grep -vi beta | sort -V | tail -1)"
+          sudo xcode-select -s "$xcode"
+
+      - name: Compilar el .ipa sin firmar
+        run: bash movil/scripts/compilar-ipa.sh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: StickerBridge-iPhone
+          path: movil/StickerBridge.ipa
+          retention-days: 30
+          compression-level: 0
