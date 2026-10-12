@@ -1,0 +1,26 @@
+# Servidor para desarrollo: sólo la API, con recarga al guardar.
+#   docker compose -f docker-compose.dev.yml up --build
+# La app llega a él a través de Metro (ver movil/app/api/[...ruta]+api.ts).
+services:
+  api:
+    container_name: stickerbridge-api-dev
+    build:
+      context: ./api
+      args:
+        DEV: "1"
+    env_file:
+      - path: .env # TELEGRAM_BOT_TOKEN; ver .env.example
+        required: false
+    environment:
+      PACKS_DIR: /data/packs
+      WATCHFILES_FORCE_POLLING: "true"
+    ports:
+      - "8000:8000"
+    volumes:
+      - dev_data:/data
+      - ./api/app:/app/app
+      - ./api/tests:/app/tests
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  dev_data:

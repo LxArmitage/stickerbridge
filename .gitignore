@@ -1,0 +1,14 @@
+# Secretos: el token del bot va en .env (ver .env.example)
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+.pytest_cache/
+
+# Herramientas locales
+.claude/
+.idea/
+.vscode/
+.DS_Store

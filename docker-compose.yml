@@ -1,0 +1,42 @@
+# Producción en un VPS: la API detrás de nginx con HTTPS de Let's Encrypt.
+#   docker compose up -d --build
+# El dominio está en nginx/default.conf. El primer certificado se pide con
+# certbot certonly --webroot -w /var/www/certbot -d <dominio>.
+services:
+  api:
+    container_name: stickerbridge-api
+    build: ./api
+    restart: unless-stopped
+    env_file: .env # TELEGRAM_BOT_TOKEN; ver .env.example
+    environment:
+      PACKS_DIR: /data/packs
+    volumes:
+      - packs_data:/data/packs # packs ya convertidos (caché)
+
+  nginx:
+    image: nginx:stable
+    container_name: stickerbridge-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - certbot_etc:/etc/letsencrypt:ro
+      - certbot_var:/var/www/certbot:ro
+    depends_on:
+      - api
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: stickerbridge-certbot
+    restart: unless-stopped
+    volumes:
+      - certbot_etc:/etc/letsencrypt
+      - certbot_var:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+volumes:
+  packs_data:
+  certbot_etc:
+  certbot_var:
