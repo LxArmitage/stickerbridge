@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "StickerBridge",
+    "slug": "stickerbridge",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "scheme": "stickerbridge",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.lxarmitage.stickerbridge",
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": [
+          "whatsapp"
+        ]
+      }
+    },
+    "android": {
+      "package": "com.stickerbridge.app"
+    },
+    "plugins": [
+      "expo-dev-client",
+      "expo-router",
+      "expo-font",
+      "expo-splash-screen",
+      "expo-image"
+    ],
+    "web": {
+      "output": "server"
+    }
+  }
+}
