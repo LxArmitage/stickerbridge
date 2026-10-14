@@ -1,11 +1,12 @@
 # Pruebas del servidor (en su imagen de Docker, con ffmpeg y rlottie) y de la
-# app (tipos y lógica) en cada push y pull request.
+# app (tipos y lógica). Por ahora se lanzan a mano desde la pestaña Actions,
+# mientras la cuenta no tenga minutos de Actions; para volver a correrlas en
+# cada cambio, agregar `push:` y `pull_request:` debajo de `on:`.
 
 name: Pruebas
 
 on:
-  push:
-  pull_request:
+  workflow_dispatch:
 
 jobs:
   servidor:
