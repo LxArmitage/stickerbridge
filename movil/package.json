@@ -2,7 +2,7 @@
   "name": "stickerbridge",
   "version": "1.0.0",
   "description": "De Telegram a WhatsApp con el puro link: app de iPhone en Expo.",
-  "author": "Alonso (ArmitaGG3)",
+  "author": "Oswaldo Campos (ArmitaGG3)",
   "license": "MIT",
   "main": "expo-router/entry",
   "dependencies": {

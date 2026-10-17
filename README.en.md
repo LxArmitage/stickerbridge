@@ -151,7 +151,7 @@ With a free Apple ID the app expires after 7 days; reinstall it with the same `.
 
 ## Author
 
-**Alonso (ArmitaGG3)**, Systems Engineer · [GitHub](https://github.com/LxArmitage)
+**Oswaldo Campos** (ArmitaGG3), Systems Engineer · [GitHub](https://github.com/LxArmitage)
 
 ## License and disclaimer
 

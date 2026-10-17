@@ -150,7 +150,7 @@ Con un Apple ID gratuito la app caduca a los 7 días y se reinstala con el mismo
 
 ## Autor
 
-**Alonso (ArmitaGG3)**, Ingeniero en Sistemas · [GitHub](https://github.com/LxArmitage)
+**Oswaldo Campos** (ArmitaGG3), Ingeniero en Sistemas · [GitHub](https://github.com/LxArmitage)
 
 ## Licencia y aviso
 
